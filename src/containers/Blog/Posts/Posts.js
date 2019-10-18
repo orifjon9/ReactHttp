@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 import Post from '../../../components/Post/Post';
+import FullPost from '../FullPost/FullPost';
 import './Posts.css';
 
 class Posts extends Component {
@@ -35,7 +36,7 @@ class Posts extends Component {
     render() {
         const postsHTML = this.state.posts.map(post => {
             return (
-                <Link to={'/' + post.id} key={post.id}>
+                <Link to={'/posts/' + post.id} key={post.id}>
                     <Post
                         title={post.title}
                         author={post.author}
@@ -43,9 +44,11 @@ class Posts extends Component {
                 </Link>);
         }).slice(0, 3);
 
-        return <section className="Posts">
-            {postsHTML}
-        </section>
+        return <div><section className="Posts">
+                        {postsHTML}
+                    </section>
+                    <Route path="/posts/:id" component={FullPost} />
+                </div>;
     }
 }
 
