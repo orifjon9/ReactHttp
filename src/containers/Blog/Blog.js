@@ -31,9 +31,11 @@ class Blog extends Component {
                     </nav>
                 </header>
                 <Switch>
-                    <Route path="/posts" render={() => <Posts />} />
-                    <Route path="/new-post" component={NewPost} />
-                    <Redirect from="/" to="/posts" />
+                    <Route path="/posts" exact render={() => <Posts />} />
+                    <Route path="/new-post" exact component={NewPost} />
+                    <Redirect from="/" exact to="/posts" />
+                    <Route component={()=><h1>Not found</h1>} />
+                    
                 </Switch>
             </div>
         );
